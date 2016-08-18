@@ -1,2 +1,2 @@
 @echo off
-python F:\randomAutomations\AutoSongDownload\getURL.py %*
+python F:\randomAutomations\AutoSongDownload\AutoSongDownload\getURL.py %*

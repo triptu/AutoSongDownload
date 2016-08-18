@@ -1,2 +1,6 @@
 *.pyc
 .pypirc
+README.txt
+MANIFEST.in
+setup.cfg
+dist
