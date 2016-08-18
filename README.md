@@ -1,5 +1,5 @@
 # AutoSongDownload
-Download song in just two step.
+Download song in just two steps.
 
 ###What it does-
 "Download song of your choice in audio format in two steps by just entering the name."
