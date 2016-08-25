@@ -1,8 +1,9 @@
 from __future__ import unicode_literals
 import youtube_dl, os, subprocess
 
-def download(url):
+def download(url, name):
     path='D:/DC++Share/Songs/pyDirect'
+    print "Downloading-", name
     os.chdir(path)
     options = {
         'format': 'bestaudio/best', # choice of quality

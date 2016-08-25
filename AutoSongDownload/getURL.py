@@ -1,6 +1,7 @@
 from youtubeAudio import download
 import requests, subprocess, os, sys, pyperclip
 from bs4 import BeautifulSoup as bs
+from subprocess import check_output
 
 '''What it does-
 "Download song of your choice in audio format in two steps by just entering the name."
@@ -23,6 +24,19 @@ tushutripathi@gmail.com
 '''
 
 path='D:\\DC++Share\\Songs\\pyDirect'
+
+# Getting pid of the cmd prompt open so that it can be closed in last.
+def get_pid():
+    ''' Logic:- tasklist gives the tasks in order they are opened. Running the program
+    will open a cmd prompt. Now if we immediately just after running the script check
+    the processes then the last cmd.exe will be what is opened by this program.
+    So we will get the pid which we will close at last.'''
+    a = check_output(["tasklist"])
+    p = a.replace('\r', '').split('\n')[3:-2]
+    for i in range(-1, -len(p), -1):
+        if "cmd.exe" in p[i]:
+            return int(p[i].split()[1])
+
 
 def check(tag): # Custom function to get the channel names through BeautifulSoup
     if tag.has_attr('class') and ('g-hovercard' in tag['class']) and tag.parent.name=='div':
@@ -50,6 +64,7 @@ def get(query, auto=0):
         count,cc=1,0    # cc=Channel Count-wiil be used to access the channel name
                                 # from the channels array
         channels=soup.find_all(check) #Scraping channel names
+        print('\a')
         print ("Choose what you want. Just enter the corresponding number.")
 
         for video in videos:
@@ -79,7 +94,7 @@ def get(query, auto=0):
             except:
                 pass
 
-            if count==11 or cc==len(channels): #Change it to how many options you want(max value-21)
+            if count==7 or cc==len(channels): #Change it to how many options you want(max value-21)
                 break
             print ""
         choice=int(raw_input("\nNow enter your choice- "))
@@ -92,29 +107,28 @@ def openFile(title):
     #print "Opening the folder."
     #subprocess.Popen('explorer '+path)
     global path
-    print "Opening the file."
+    print "Let's play the music."
     for ext in ['.webm', '.m4a', '.mp3']:
-        name='"'+path+"\\"+title+ext+'"'
-        try:
-            p = subprocess.Popen(name, shell=True)
-            # Closing the cmd window opened
-            subprocess.Popen("TASKKILL /F /PID {pid}".format(pid=p.pid))
+        name=path+"\\"+title+ext
+        if os.path.isfile(name):
+            subprocess.Popen('"'+name+'"', shell=True)
             break
-        except:
-            pass
+        elif os.path.isfile(name.replace('-','_')):  # In hindi songs - is replaced by _ for some weird reasons.
+            name = name.replace('-','_')
+            subprocess.Popen('"'+name+'"', shell=True)
+            break
     else:
         print "File can't be opened for some reasons."
         print "Opening the folder."
         path = '"'+path+'"'
-        p = subprocess.Popen('explorer '+path)
-        subprocess.Popen("TASKKILL /F /PID {pid}".format(pid=p.pid))
-    sys.exit()
+        subprocess.Popen('explorer '+path)
 
 
 def main(query):
 
     file_open = True # Whether to open the file after download
     if query[-1]=='/':
+        query = query[:-1]
         file_open = False
 
     if query[0]=='/':
@@ -123,21 +137,24 @@ def main(query):
     else:
         url,title=get(query)
 
+    title = title.replace('"', "'") # Replacing " by ' . Because youtube_dl does so before saving.
+
     print "Got the url",url
+    print "And the name", title
     for ext in ['.webm', '.m4a', '.mp3']:
         name = path+"\\"+title+ext
-        if os.path.isfile(name):
-            print "It's already downloaded."
+        if os.path.isfile(name) or os.path.isfile(name.replace('_','-')):
+            print "But it's already downloaded."
             break
     else:
         print "Starting download..."
-        download(url)
+        download(url, title)
     if file_open:
         openFile(title)
-    sys.exit()
 
 
 if __name__=="__main__":
+    pid = get_pid()
     try:
         sys.argv[1]         # Checks if cmd line argument is given
         query= " ".join(sys.argv[1:])
@@ -147,3 +164,4 @@ if __name__=="__main__":
         else:
             query = "/"+pyperclip.paste()
     main(query)
+    subprocess.Popen("TASKKILL /F /PID {pid}".format(pid=pid))

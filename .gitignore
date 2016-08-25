@@ -1,6 +1,10 @@
 *.pyc
 .pypirc
 README.txt
+justForMe.txt
 MANIFEST.in
 setup.cfg
 dist
+song.bat
+song.lnk
+song2.bat
