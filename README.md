@@ -1,16 +1,16 @@
 # AutoSongDownload
 Download song in just two steps.
 
-###What it does-
+### What it does-
 "Download song of your choice in audio or video format in two steps by just entering the name."
 You can chose to download only one of audio/video or both while giving the command. 
 
-###Getting started-
+### Getting started-
 * Clone the repository. 
 * Add the location to your path using environment variables.
 * In getUrl.py and youtubeAudio.py change pathA and pathV to folder you want your song to download.
 
-###Usage - 5 ways:-
+### Usage - 5 ways:-
 * Run the program and enter the song name.
 * From cmd line or run(win+R) enter "song \<song name\>". This is will give you top
     n results(n=6 by deafult).
@@ -24,11 +24,11 @@ You can chose to download only one of audio/video or both while giving the comma
 * You can create a keyboard shorcut to shorten the 4th way even more. Just copy the
     the song name and press that Keyboard shortcut. And the download will start.
 
-#####Note:- Optionally if you don't want the song to autoplay, you can append the song name with '/'.
+##### Note:- Optionally if you don't want the song to autoplay, you can append the song name with '/'.
 
-######eg. "song /count on me/"  will download this song without giving options but will not play it.
-######eg. "song count on me1"   will download both video and audio of song to their respective folders.
-######eg. "song shape of you/0" will download only video and not autoplay it after download.
+###### eg. "song /count on me/"  will download this song without giving options but will not play it.
+###### eg. "song count on me1"   will download both video and audio of song to their respective folders.
+###### eg. "song shape of you/0" will download only video and not autoplay it after download.
 
 I have made this on windows and python 2.7. It may require some tweaks to get it working on other OS.
 
