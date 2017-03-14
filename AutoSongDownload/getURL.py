@@ -29,8 +29,8 @@ Tushar Tripathi
 tushutripathi@gmail.com
 '''
 
-pathA = 'D:\\DC++Share\\Songs\\pyDirect'
-pathV = 'D:\\DC++Share\\Songs\\Video\\pyDirect'
+pathA = 'D:\\DC++Share\\Songs\\pyDirect'          # Path for audio
+pathV = 'D:\\DC++Share\\Songs\\Video\\pyDirect'   # Path for Video
 path = pathA
 
 

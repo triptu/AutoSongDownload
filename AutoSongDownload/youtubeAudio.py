@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 import youtube_dl, os, subprocess
 
-pathA = 'D:/DC++Share/Songs/pyDirect'
-pathV = 'D:/DC++Share/Songs/Video/pyDirect'
+pathA = 'D:/DC++Share/Songs/pyDirect'        # Path for audio
+pathV = 'D:/DC++Share/Songs/Video/pyDirect'  # Path for video
 
 def download(url, name, audio=True):
     if audio==True:   # To download audio.
