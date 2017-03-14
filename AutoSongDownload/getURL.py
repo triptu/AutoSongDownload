@@ -9,7 +9,7 @@ from youtubeAudio import download
 '''What it does-
 "Download song of your choice in audio format in two steps by just entering the name."
 
-Usage - 4 ways:-
+Usage - 6 ways:-
 1. Run the program and enter the song name.
 2. From cmd line or run enter "song <song name>". This is will give you top
     n results(n depends on you).
