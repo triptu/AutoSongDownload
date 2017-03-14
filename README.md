@@ -10,7 +10,7 @@ You can chose to download only one of audio/video or both while giving the comma
 * Add the location to your path using environment variables.
 * In getUrl.py and youtubeAudio.py change pathA and pathV to folder you want your song to download.
 
-### Usage - 5 ways:-
+### Usage - 6 ways:-
 * Run the program and enter the song name.
 * From cmd line or run(win+R) enter "song \<song name\>". This is will give you top
     n results(n=6 by deafult).
