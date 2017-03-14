@@ -1,17 +1,30 @@
 from __future__ import unicode_literals
 import youtube_dl, os, subprocess
 
-def download(url, name):
-    path='D:/DC++Share/Songs/pyDirect'
+pathA = 'D:/DC++Share/Songs/pyDirect'
+pathV = 'D:/DC++Share/Songs/Video/pyDirect'
+
+def download(url, name, audio=True):
+    if audio==True:   # To download audio.
+        path = pathA
+    else:
+        path = pathV
     print "Downloading-", name
-    os.chdir(path)
-    options = {
-        'format': 'bestaudio/best', # choice of quality
-        'extractaudio' : True,      # only keep the audio
-        'audioformat' : "mp3",      # convert to mp3
-        'outtmpl' : '%(title)s.%(ext)s',
-        'noplaylist' : True,        # only download single song, not playlist
-    }
+    os.chdir(path)                          # Path changed to download folder.
+    if audio:
+        options = {
+            'format': 'bestaudio/best',         # choice of quality
+            'extractaudio' : True,             # choosing whether to donwload audio or video.
+            'audioformat' : "mp3",              # convert to mp3 for audio format.
+            'outtmpl' : '%(title)s.%(ext)s',    # Name of output.
+            'noplaylist' : True,                # only download single song, not playlist
+        }
+    else:
+        options = {
+            'outtmpl' : '%(title)s.%(ext)s',    # Name of output.
+            'noplaylist' : True,                # only download single song, not playlist
+        }
+
     ydl = youtube_dl.YoutubeDL(options)
     with ydl:
         ydl.download([url])
