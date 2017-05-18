@@ -1,1 +1,1 @@
-from getURL import main
+from .getURL import main

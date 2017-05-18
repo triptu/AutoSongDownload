@@ -1,4 +1,4 @@
-
+from __future__ import unicode_literals
 import youtube_dl, os, subprocess
 
 pathA = 'D:/DC++Share/Songs/pyDirect'        # Path for audio
@@ -9,7 +9,7 @@ def download(url, name, audio=True):
         path = pathA
     else:
         path = pathV
-    print("Downloading-", name)
+    print "Downloading-", name
     os.chdir(path)                          # Path changed to download folder.
     if audio:
         options = {
@@ -32,5 +32,5 @@ def download(url, name, audio=True):
     return None
 
 if __name__=="__main__":
-    url = input("Input song's url - ")
+    url = raw_input("Input song's url - ")
     download(url)
