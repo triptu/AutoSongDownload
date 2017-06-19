@@ -8,7 +8,7 @@ You can chose to download only one of audio/video or both while giving the comma
 ### Getting started-
 * Clone the repository. 
 * Add the location to your path using environment variables.
-* In getUrl.py and youtubeAudio.py change pathA and pathV to folder you want your song to download.
+* In getUrl.py and youtubeAudio.py change pathA and pathV to folder you want your song's audio and video to download.
 
 ### Usage - 6 ways:-
 * Run the program and enter the song name.
@@ -26,8 +26,8 @@ You can chose to download only one of audio/video or both while giving the comma
 
 ##### Note:- Optionally if you don't want the song to autoplay, you can append the song name with '/'.
 
-###### eg. "song /count on me/"  will download this song without giving options but will not play it.
-###### eg. "song count on me1"   will download both video and audio of song to their respective folders.
+###### eg. "song /count on me/"  will download this song without giving options and will not play it automatically after download.
+###### eg. "song count on me1"   will show you top search results and download both video and audio of your choice to their respective      folders.
 ###### eg. "song shape of you/0" will download only video and not autoplay it after download.
 
 I have made this on windows and python 2.7. It may require some tweaks to get it working on other OS.
