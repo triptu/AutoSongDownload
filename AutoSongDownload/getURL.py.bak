@@ -5,7 +5,7 @@ import sys
 import pyperclip
 from bs4 import BeautifulSoup as bs
 from subprocess import check_output
-from .youtubeAudio import download
+from youtubeAudio import download
 '''What it does-
 "Download song of your choice in audio format in two steps by just entering the name."
 
@@ -66,7 +66,7 @@ def get(query, auto=0):
     videos = soup.find_all("a", class_="yt-ui-ellipsis-2")
 
     if auto == 1:     # Automatically choses the first one to download.
-        print(("File to download ", videos[0].string))
+        print ("File to download ", videos[0].string)
         return (base + videos[0]['href'], videos[0]['title'])
 
     else:
@@ -82,19 +82,19 @@ def get(query, auto=0):
                 continue
             try:
                 # In case of playlist the code will tell in the same line
-                print("%d. %s" % (count, video.string.strip()), end=' ')
+                print "%d. %s" % (count, video.string.strip()),
                 if 'list' in video['href']:    # If its a playlist
-                    print(" - A PLAYLIST", end=' ')
-                print("")
+                    print " - A PLAYLIST",
+                print ""
 
                 channel = channels[cc]
                 if video.parent.next_sibling.string == "YouTube":
                     print ("-Made by Youtube.")
                 else:
                     try:        # Checking if its verified channel
-                        print("Channel - ", channel.string.strip(), "-Verified")
+                        print "Channel - ", channel.string.strip(), "-Verified"
                     except:
-                        print("Channel - ", channel.string.strip())  # Not verified
+                        print "Channel - ", channel.string.strip()  # Not verified
                     count += 1
 
                 cc += 1
@@ -105,10 +105,10 @@ def get(query, auto=0):
             # Change it to how many options you want(max value-21)
             if count == 6 or cc == len(channels):
                 break
-            print("")
-        choice = int(input("\nNow enter your choice- "))
-        print("You chose- ", videos[choice - 1].string.encode('ascii', 'ignore'))
-        print("Download is starting...")
+            print ""
+        choice = int(raw_input("\nNow enter your choice- "))
+        print "You chose- ", videos[choice - 1].string.encode('ascii', 'ignore')
+        print "Download is starting..."
         return (base + videos[choice - 1]['href'], videos[choice - 1]['title'])
 
 
@@ -116,7 +116,7 @@ def openFile(title):
     # print "Opening the folder."
     # subprocess.Popen('explorer '+path)
     global path
-    print("Let's play the music.")
+    print "Let's play the music."
     for ext in ['.webm', '.m4a', '.mp3', '.mp4', '.flv']:
         name = path + "\\" + title + ext
         if os.path.isfile(name):
@@ -128,8 +128,8 @@ def openFile(title):
             subprocess.Popen('"' + name + '"', shell=True)
             break
     else:
-        print("File can't be opened for some reasons.")
-        print("Opening the folder.")
+        print "File can't be opened for some reasons."
+        print "Opening the folder."
         path = '"' + path + '"'
         subprocess.Popen('explorer ' + path)
 
@@ -138,7 +138,7 @@ def main(query):
     global path
     whatToDownload = 'audio'                    # Whether to download audio or video.
     if query[-1] == '1':            # Download Video.
-        print("Note:- Song video as well as audio will be downloaded.")
+        print "Note:- Song video as well as audio will be downloaded."
         query = query[:-1].strip()
         path = pathV
         whatToDownload = 'both'
@@ -146,9 +146,9 @@ def main(query):
         query = query[:-1].strip()
         path = pathV
         whatToDownload = 'video'
-        print("Only Song video will be downloaded.")
+        print "Only Song video will be downloaded."
     else:
-        print("Only Song Audio will be downloaded.")
+        print "Only Song Audio will be downloaded."
 
     file_open = True                # Whether to open the file after download.
     if query[-1] == '/':              # Do not open the file after download.
@@ -164,20 +164,20 @@ def main(query):
     title = title.encode('ascii', 'ignore')
     title = title.replace('"', "'")  # Replacing " by '. Because youtube_dl does so before saving.
 
-    print("Got the url", url)
-    print("And the name", title)
+    print "Got the url", url
+    print "And the name", title
     for ext in ['.webm', '.m4a', '.mp3', '.mp4', '.flv']:
         name = path + "\\" + title + ext
         if os.path.isfile(name) or os.path.isfile(name.replace('_', '-')):
-            print("Oh! It's already downloaded.")
+            print "Oh! It's already downloaded."
             break
     else:
-        print("Starting download...")
+        print "Starting download..."
         if whatToDownload in ['audio', 'both']:
-            print("Downloading Audio...")
+            print "Downloading Audio..."
             download(url, title, audio=True)
         if whatToDownload in ['video', 'both']:
-            print("\nNow Downloading Video...")
+            print "\nNow Downloading Video..."
             download(url, title, audio=False)
     if file_open:
         openFile(title)
@@ -190,12 +190,12 @@ if __name__ == "__main__":
         query = " ".join(sys.argv[1:])
     except:
         if "idlelib" in sys.modules:
-            query = input("Enter the song's name. - ")
+            query = raw_input("Enter the song's name. - ")
         else:
             query = "/" + pyperclip.paste()
     try:
         main(query)
         subprocess.Popen("TASKKILL /F /PID {pid}".format(pid=pid))  # Close cmd only if successful.
     except Exception as e:
-        print("Error occured-")
-        print(e)
+        print "Error occured-"
+        print e
